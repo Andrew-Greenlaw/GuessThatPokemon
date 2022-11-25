@@ -12,6 +12,7 @@ class PokemonService {
     const res = await pokeApi.get(`pokemon/${id}`)
     console.log('activePokemon', res.data)
     AppState.activePokemon = new Pokemon(res.data)
+    console.log('pokemon', AppState.activePokemon)
   }
 
 }
