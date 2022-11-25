@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid home">
-    <div class="row">
+    <div class="row h-100">
       <div class="col-md-6 d-flex justify-content-center align-items-center">
-
+        <img :class="revealed == 1 ? '' : 'unrevealed'" :src="activePokemon.img" alt="pokemon img">
       </div>
     </div>
   </div>
@@ -28,7 +28,8 @@ export default {
       getRandomPokemon()
     })
     return {
-      activePokemon: computed(() => AppState.activePokemon)
+      activePokemon: computed(() => AppState.activePokemon),
+      revealed: computed(() => AppState.revealed)
     }
   }
 }
@@ -40,5 +41,10 @@ export default {
   background-size: cover;
   background-position: center;
   min-height: 100%;
+}
+
+.unrevealed {
+  filter: grayscale(100%);
+  filter: brightness(0%);
 }
 </style>
