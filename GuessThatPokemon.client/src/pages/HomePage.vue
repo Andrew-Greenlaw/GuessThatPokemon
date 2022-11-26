@@ -5,7 +5,7 @@
         <img :class="revealed == 1 ? '' : 'unrevealed'" :src="activePokemon.img" alt="pokemon img">
       </div>
       <div class="col-md-6">
-        <button class="btn" type="button" onclick="toggleRevealed()">Reveal</button>
+        <button class="btn" type="button" @click="toggleRevealed()">Reveal</button>
       </div>
     </div>
   </div>
@@ -33,12 +33,8 @@ export default {
     return {
       activePokemon: computed(() => AppState.activePokemon),
       revealed: computed(() => AppState.revealed),
-      async toggleRevealed() {
-        try {
-          await pokemonService.toggleRevealed()
-        } catch (error) {
-
-        }
+      toggleRevealed() {
+        AppState.revealed = 1
       }
     }
   }
