@@ -4,6 +4,9 @@
       <div class="col-md-6 d-flex justify-content-center align-items-center">
         <img :class="revealed == 1 ? '' : 'unrevealed'" :src="activePokemon.img" alt="pokemon img">
       </div>
+      <div class="col-md-6">
+        <button class="btn" type="button" onclick="toggleRevealed()">Reveal</button>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +32,14 @@ export default {
     })
     return {
       activePokemon: computed(() => AppState.activePokemon),
-      revealed: computed(() => AppState.revealed)
+      revealed: computed(() => AppState.revealed),
+      async toggleRevealed() {
+        try {
+          await pokemonService.toggleRevealed()
+        } catch (error) {
+
+        }
+      }
     }
   }
 }

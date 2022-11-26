@@ -14,6 +14,8 @@ class PokemonService {
     AppState.activePokemon = new Pokemon(res.data)
     console.log('pokemon', AppState.activePokemon)
   }
-
+  async toggleRevealed() {
+    AppState.revealed = 1
+  }
 }
 export const pokemonService = new PokemonService()
