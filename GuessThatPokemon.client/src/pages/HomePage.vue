@@ -2,10 +2,15 @@
   <div class="container-fluid home">
     <div class="row h-100">
       <div class="col-md-6 d-flex justify-content-center align-items-center">
-        <img :class="revealed == 1 ? '' : 'unrevealed'" :src="activePokemon.img" alt="pokemon img">
+        <img height="500" width="500" class="poke-pic" :class="revealed == 1 ? '' : 'unrevealed'"
+          :src="activePokemon.img" alt="pokemon img">
+        <p class="name" v-if="revealed == 1"> {{ activePokemon?.name }}
+        </p>
       </div>
+
       <div class="col-md-6">
         <button class="btn" type="button" @click="toggleRevealed()">Reveal</button>
+        <button class="btn" type="button" @click="getRandomPokemon()">Next Pokemon</button>
       </div>
     </div>
   </div>
@@ -35,6 +40,15 @@ export default {
       revealed: computed(() => AppState.revealed),
       toggleRevealed() {
         AppState.revealed = 1
+      },
+      async getRandomPokemon() {
+        try {
+          AppState.activePokemon = {}
+          AppState.revealed = 0
+          await pokemonService.getRandomPokemon()
+        } catch (error) {
+          Pop.error('[GetRandomPokemon]', error)
+        }
       }
     }
   }
@@ -47,6 +61,15 @@ export default {
   background-size: cover;
   background-position: center;
   min-height: 100%;
+}
+
+.poke-pic {
+  transition: all 0.3s ease;
+}
+
+.name {
+  font-size: 60px;
+  font-weight: 700;
 }
 
 .unrevealed {
